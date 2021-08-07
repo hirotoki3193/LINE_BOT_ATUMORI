@@ -35,7 +35,7 @@ def get_connection():
 def get_response_message(mes_from):
     with get_connection() as conn:
         with conn.cursor(cursor_factory=DictCursor) as cur:
-            cur.execute("SELECT * FROM fishes WHERE name='{}'".format(mes_from))
+            cur.execute("SELECT * FROM fishes WHERE name = %s",(mes_from,))
             rows = cur.fetchall()
             return rows
         
