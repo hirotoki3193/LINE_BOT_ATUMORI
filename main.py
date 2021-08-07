@@ -71,6 +71,10 @@ def handle_message(event):
                         f'価格:{r[3]}\n'\
                         f'場所は{r[4]}\n'\
                         f'魚影の大きさは{r[2]}'
+        
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=reply_message))
 
 if __name__ == "__main__":
     port = int(os.getenv("PORT"))
