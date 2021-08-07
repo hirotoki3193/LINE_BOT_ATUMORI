@@ -59,21 +59,19 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    line_bot_api.reply_message(
-        rows = get_response_message(event.message.text)
-        
-        if len(rows)==0:
-             line_bot_api.reply_message(
-                 event.reply_token,
-                 TextSendMessage(text='分かりません...'))
-        else:
-            r = rows[0]
-            reply_message = f'{r[1]}の情報は...\n'\
-                            f'価格:{r[3]}'\
-                            f'場所は{r[4]}'\
-                            f'魚影の大きさは'{r[2]}'
+    rows = get_response_message(event.message.text)
+    
+    if len(rows)==0:
+         line_bot_api.reply_message(
+             event.reply_token,
+             TextSendMessage(text='分かりません...'))
+    else:
+        r = rows[0]
+        reply_message = f'{r[1]}の情報は...\n'\
+                        f'価格:{r[3]}'\
+                        f'場所は{r[4]}'\
+                        f'魚影の大きさは'{r[2]}'
 
 if __name__ == "__main__":
-#    app.run()
     port = int(os.getenv("PORT"))
     app.run(host="0.0.0.0", port=port)
